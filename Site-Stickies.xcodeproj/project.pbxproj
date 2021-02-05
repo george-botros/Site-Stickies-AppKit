@@ -18,6 +18,7 @@
 		6ED9BB0A25CD09070097EF0D /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9BB0925CD09070097EF0D /* script.js */; };
 		6ED9BB0C25CD09070097EF0D /* ToolbarItemIcon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9BB0B25CD09070097EF0D /* ToolbarItemIcon.pdf */; };
 		6ED9BB0F25CD09070097EF0D /* SafariExtensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9BB0D25CD09070097EF0D /* SafariExtensionViewController.xib */; };
+		6ED9BB4425CD26540097EF0D /* stickynotesstyles.css in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9BB4325CD26540097EF0D /* stickynotesstyles.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		6ED9BB0E25CD09070097EF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
 		6ED9BB1025CD09070097EF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ED9BB1125CD09070097EF0D /* Site_Stickies_Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Site_Stickies_Extension.entitlements; sourceTree = "<group>"; };
+		6ED9BB4325CD26540097EF0D /* stickynotesstyles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stickynotesstyles.css; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				6ED9BB0925CD09070097EF0D /* script.js */,
+				6ED9BB4325CD26540097EF0D /* stickynotesstyles.css */,
 				6ED9BB0B25CD09070097EF0D /* ToolbarItemIcon.pdf */,
 			);
 			path = Resources;
@@ -233,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ED9BB4425CD26540097EF0D /* stickynotesstyles.css in Resources */,
 				6ED9BB0F25CD09070097EF0D /* SafariExtensionViewController.xib in Resources */,
 				6ED9BB0C25CD09070097EF0D /* ToolbarItemIcon.pdf in Resources */,
 				6ED9BB0A25CD09070097EF0D /* script.js in Resources */,
