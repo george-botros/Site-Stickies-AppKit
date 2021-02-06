@@ -6,42 +6,33 @@ if(window.top === window) {
                     console.log("creating a new note 📝", event);
                     var sticky = document.createElement("div");
                     sticky.setAttribute("class", "sticky");
-                    //sticky.setAttribute("contenteditable", "true");
+                    sticky.setAttribute("contenteditable", "true");
                     document.body.appendChild(sticky);
                     sticky.innerHTML = "New note 📝";
-                    sticky.onmousedown = matchPosition;
-                    console.log("just added a function to run when mouse goes down on sticky")
-                    
+                    sticky.onmousedown = noteClicked;
             }
     }
     
     
-    function matchPosition(e) {
-        console.log("hi")
-        //event.target.setAttribute("currentlyClicked", "true");
-        sticky = e.target;
+    function noteClicked(clickEvent) {
+        let sticky = clickEvent.target;
+        let originalMouseX = clickEvent.clientX
+        let originalMouseY = clickEvent.clientY
 
-        
-        sticky.onmousemove = elementDrag;
-        sticky.onmouseup = function() {
-            sticky.onmousemove = null;
+        window.onmousemove = matchPosition;
+
+        window.onmouseup = function() {
+            window.onmousemove = null
         }
-    }
-    
-    function elementDrag(dragevent) {
-        sticky = dragevent.target;
-        divX = sticky.getBoundingClientRect().left;
-        divY = sticky.getBoundingClientRect().top;
-        mouseX = dragevent.clientX;
-        mouseY = dragevent.clientY;
-        
-        offsetX = mouseX - divX;
-        offsetY = mouseY - divY;
-        
-        sticky.style.left = (mouseX - offsetX) + "px";
-        console.log(sticky.style.left)
-        sticky.style.top = (mouseY - offsetY) + "px";
-        console.log("divX & divY", divX, divY, "mouseX, mouseY", mouseX, mouseY);
-        console.log(typeof divX,typeof divY, typeof mouseX, typeof mouseY, typeof offsetX, typeof offsetY);
+
+        function matchPosition(e) {
+            let amountMouseMovedX = e.clientX - originalMouseX
+            let amountMouseMovedY = e.clientY - originalMouseY
+            const rect = sticky.getBoundingClientRect()
+            sticky.style.left = (rect.left + amountMouseMovedX) + "px";
+            sticky.style.top = (rect.top + amountMouseMovedY) + "px";
+            originalMouseX = e.clientX
+            originalMouseY = e.clientY
+        }
     }
 }
