@@ -7,7 +7,7 @@
 
 import SafariServices
 
-let defaults = UserDefaults.init(suiteName: "L27L4K8SQU.Site-Stickies")
+let defaults = UserDefaults.init(suiteName: "shockerella.Site-Stickies")
 
 struct StickyNote: Codable {
     var top: Int?
@@ -25,7 +25,6 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             let decoder = JSONDecoder()
             let note = defaults!.object(forKey: "note") as! Data
             let object = try? decoder.decode(StickyNote.self, from: note)
-            page.dispatchMessageToScript(withName: "currentNotes", userInfo: ["y": object?.top ?? 5, "x": object?.left ?? 3]) // also send user info describing what/where notes should be on page.
         }
         
         if messageName == "noteUpdate" {
@@ -34,11 +33,8 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             note.content = userInfo!["content"] as? String
             note.top = userInfo!["top"] as? Int
             note.left = userInfo!["left"] as? Int
-            page.dispatchMessageToScript(withName: "printToConsole", userInfo: ["co": "hi"])
             if let noteAsData = try? encoder.encode(note) {
-                print(noteAsData)
                 defaults!.set(noteAsData, forKey: "note")
-                page.dispatchMessageToScript(withName: "printToConsole", userInfo: ["co": note.content])
             }
         }
 
@@ -51,15 +47,6 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 page?.dispatchMessageToScript(withName: "toolbarItemClicked")
                 })
             }
-    }
-    
-    override func validateToolbarItem(in window: SFSafariWindow, validationHandler: @escaping ((Bool, String) -> Void)) {
-        // This is called when Safari's state changed in some way that would require the extension's toolbar item to be validated again.
-        validationHandler(true, "")
-    }
-    
-    override func popoverViewController() -> SFSafariExtensionViewController {
-        return SafariExtensionViewController.shared
     }
 
 }

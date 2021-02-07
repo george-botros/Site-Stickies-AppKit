@@ -1,14 +1,7 @@
 if(window.top === window) {
     safari.self.addEventListener("message", createNewNote)
-    safari.self.addEventListener("message", printNoteProperties)
     safari.self.addEventListener("message", printToConsole)
-    
-    function printNoteProperties(event) {
-        if (event.name == "currentNotes") {
-            console.log(event.message)
-        }
-    }
-    
+
     function printToConsole(event) {
         if (event.name == "printToConsole") {
             console.log(event.message)
@@ -43,13 +36,15 @@ if(window.top === window) {
             let amountMouseMovedX = e.clientX - originalMouseX
             let amountMouseMovedY = e.clientY - originalMouseY
             const rect = sticky.getBoundingClientRect()
-            sticky.style.left = (rect.left + amountMouseMovedX) + "px";
-            sticky.style.top = (rect.top + amountMouseMovedY) + "px";
+            var updatedPositionX  = rect.left + amountMouseMovedX;
+            var updatedPositionY = rect.top + amountMouseMovedY;
+            
+            sticky.style.left = (updatedPositionX) + "px";
+            sticky.style.top = (updatedPositionY) + "px";
             originalMouseX = e.clientX
             originalMouseY = e.clientY
             console.log("noteupdateran")
-            safari.extension.dispatchMessage("noteUpdate", {"content": sticky.innerHTML, "top": sticky.style.top, "left": sticky.style.left})
-            safari.extension.dispatchMessage("getCurrentNotes");
+            safari.extension.dispatchMessage("noteUpdate", {"content": sticky.innerHTML, "top": updatedPositionY, "left": updatedPositionX})
         }
     }
     
