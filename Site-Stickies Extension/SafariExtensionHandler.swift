@@ -13,32 +13,45 @@ struct StickyNote: Codable {
     var top: Int?
     var left: Int?
     var content: String?
-    // add url property later.
 }
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
     
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String : Any]?) {
-        // This method will be called when a content script provided by your extension calls safari.extension.dispatchMessage("message").
-        if messageName == "getCurrentNotes" {
-            // check local storage
-            let decoder = JSONDecoder()
-            let note = defaults!.object(forKey: "note") as! Data
-            let object = try? decoder.decode(StickyNote.self, from: note)
-        }
-        
-        if messageName == "noteUpdate" {
-            var note = StickyNote()
-            let encoder = JSONEncoder()
-            note.content = userInfo!["content"] as? String
-            note.top = userInfo!["top"] as? Int
-            note.left = userInfo!["left"] as? Int
-            if let noteAsData = try? encoder.encode(note) {
-                defaults!.set(noteAsData, forKey: "note")
+
+        page.getPropertiesWithCompletionHandler { properties in
+            let url = properties?.url?.absoluteString
+            
+            // whenever a page loads, the script will ask to getCurrentNotes to see (and then render) what nots have previously been written on that page.
+            if messageName == "getCurrentNotes" {
+                let decoder = JSONDecoder()
+                let notesFromMemoryJSON = defaults!.object(forKey: "\(url!)") as! Data
+                let notesFromMemory = try! decoder.decode([StickyNote].self, from: notesFromMemoryJSON)
+                
+                var messageToReturn = [String: Any]()
+                for (index, note) in notesFromMemory.enumerated() {
+                    messageToReturn["\(index)"] = [note.content, note.left, note.top]
+                }
+                page.dispatchMessageToScript(withName: "printToConsole", userInfo: messageToReturn)
+                page.dispatchMessageToScript(withName: "notesFromStorage", userInfo: messageToReturn)
+                // George, I finally got data storage and retireval working. For you to do: implement a function in script.js that will respond to the message "notesFromStorage" and use its userInfo (messageToReturn) to create notes in the HTML page in the correct positions and with the correct content.
+            }
+
+            // whenever the script notices a change to the notes (position), it will send the message 'noteUpdate' alerting the extension of the script. The userInfo of this message will be the position & content of every note. The following function's purpose is to write these updated values to memory (UserDefaults).
+            if messageName == "noteUpdate" {
+                var notesOnPage = [StickyNote]()
+                let info = userInfo as! [String : [Any]]
+                for (noteNumber, properties) in info {
+                    let note = StickyNote(top: properties[1] as? Int, left: properties[2] as? Int, content: properties[0] as? String)
+                    notesOnPage.append(note)
+                }
+                let encoder = JSONEncoder()
+                if let notesOnPageJSON = try? encoder.encode(notesOnPage) {
+                    defaults!.set(notesOnPageJSON, forKey: "\(url!)")
+                }
             }
         }
 
-        
     }
 
     override func toolbarItemClicked(in window: SFSafariWindow) {
