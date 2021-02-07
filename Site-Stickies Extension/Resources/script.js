@@ -35,4 +35,11 @@ if(window.top === window) {
             originalMouseY = e.clientY
         }
     }
+    
+    window.addEventListener("DOMContentLoaded", (event) => {
+        safari.extension.dispatchMessage("getCurrentNotes");
+    })
+    
+            
+
 }
