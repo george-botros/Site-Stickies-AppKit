@@ -16,27 +16,21 @@ function printToConsole(event) {
 
 function createNewNote(event) {
     if (event.name == "toolbarItemClicked") {
-        console.log("creating a new note 📝", event);
-        var sticky = document.createElement("div");
-        sticky.setAttribute("class", "sticky-shockerella");
-        sticky.setAttribute("contenteditable", "true");
-        sticky.setAttribute("placeh","New note 📝");
-        document.body.appendChild(sticky);
-        sticky.onmousedown = noteClicked;
+        newNote();
     }
 }
-/*
-function newNote(content){
-    console.log("creating a new note 📝", event);
+
+function newNote() {
     var sticky = document.createElement("div");
     sticky.setAttribute("class", "sticky-shockerella");
     sticky.setAttribute("contenteditable", "true");
     sticky.setAttribute("placeh","New note 📝");
-    sticky.innerHTML(content);
     document.body.appendChild(sticky);
     sticky.onmousedown = noteClicked;
+    
+    return sticky;
 }
-*/
+
 function noteClicked(clickEvent) {
     var sticky = clickEvent.target;
     var originalMouseX = clickEvent.clientX
@@ -59,9 +53,6 @@ function noteClicked(clickEvent) {
         sticky.style.left = (updatedPositionX) + "px";
         sticky.style.top = (updatedPositionY) + "px";
         
-        console.log("Rect coords: ", rect.left, rect.top);
-        console.log("CSS coords: ", sticky.style.left,sticky.style.top);
-        
         getAllNotesOnPageAndPassToExtension()
     }
 }
@@ -72,7 +63,6 @@ function getAllNotesOnPageAndPassToExtension() {
     notes.forEach((note, index) => {
         listOfNotes[index.toString()] = [note.innerHTML, Math.floor(note.getBoundingClientRect().left + window.scrollX), Math.floor(note.getBoundingClientRect().top + window.scrollY)]
     })
-    console.log(listOfNotes)
     safari.extension.dispatchMessage("noteUpdate", listOfNotes)
 }
 
@@ -88,16 +78,9 @@ function createNotesFromProperties(noteProperties) {
     
     // {0: ["New note 📝", 1120, 100], 1: ["t", 1120, 100], 2: ["", 1065, 120]}
     //  #    content     left(x) top(y)
-    console.log("Entered the createnotesfromproperties function");
     var index = 0;
     for (note in noteProperties) {
-        console.log("creating a new note FROM PROPERTIES 📝");
-        var sticky = document.createElement("div");
-        sticky.setAttribute("class", "sticky-shockerella");
-        sticky.setAttribute("contenteditable", "true");
-        sticky.setAttribute("placeh","New note 📝");
-        document.body.appendChild(sticky);
-        sticky.onmousedown = noteClicked;
+        sticky = newNote();
         
         sticky.innerHTML = noteProperties[`${index}`][0];
         sticky.style.left = noteProperties[`${index}`][1] + "px";
