@@ -27,6 +27,7 @@ function newNote() {
     sticky.setAttribute("placeh","New note 📝");
     document.body.appendChild(sticky);
     sticky.onmousedown = noteClicked;
+    sticky.onkeyup = getAllNotesOnPageAndPassToExtension;
     
     return sticky;
 }
@@ -91,3 +92,4 @@ function createNotesFromProperties(noteProperties) {
     }
         
 }
+
