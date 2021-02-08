@@ -20,13 +20,23 @@ function createNewNote(event) {
         var sticky = document.createElement("div");
         sticky.setAttribute("class", "sticky-shockerella");
         sticky.setAttribute("contenteditable", "true");
+        sticky.setAttribute("placeh","New note 📝");
         document.body.appendChild(sticky);
-        sticky.innerHTML = "New note 📝";
         sticky.onmousedown = noteClicked;
     }
 }
-
-
+/*
+function newNote(content){
+    console.log("creating a new note 📝", event);
+    var sticky = document.createElement("div");
+    sticky.setAttribute("class", "sticky-shockerella");
+    sticky.setAttribute("contenteditable", "true");
+    sticky.setAttribute("placeh","New note 📝");
+    sticky.innerHTML(content);
+    document.body.appendChild(sticky);
+    sticky.onmousedown = noteClicked;
+}
+*/
 function noteClicked(clickEvent) {
     var sticky = clickEvent.target;
     var originalMouseX = clickEvent.clientX
@@ -85,6 +95,7 @@ function createNotesFromProperties(noteProperties) {
         var sticky = document.createElement("div");
         sticky.setAttribute("class", "sticky-shockerella");
         sticky.setAttribute("contenteditable", "true");
+        sticky.setAttribute("placeh","New note 📝");
         document.body.appendChild(sticky);
         sticky.onmousedown = noteClicked;
         

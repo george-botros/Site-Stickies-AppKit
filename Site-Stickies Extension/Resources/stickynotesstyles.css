@@ -1,5 +1,7 @@
 
 .sticky-shockerella {
+    
+    
     position: absolute;
     top: 100px;
     right: 100px;
@@ -12,4 +14,8 @@
     background: rgb(253, 253, 150);
     color: black;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+}
+
+.sticky-shockerella:empty:not(:focus):before{
+    content:attr(placeh)
 }
