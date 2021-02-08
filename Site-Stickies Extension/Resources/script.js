@@ -28,9 +28,13 @@ function createNewNote(event) {
 
 
 function noteClicked(clickEvent) {
-    let sticky = clickEvent.target;
-    let originalMouseX = clickEvent.clientX
-    let originalMouseY = clickEvent.clientY
+    var sticky = clickEvent.target;
+    var originalMouseX = clickEvent.clientX
+    var originalMouseY = clickEvent.clientY
+    var rect = sticky.getBoundingClientRect();
+    var offsetX = originalMouseX - rect.left; //Offset is positive.
+    var offsetY = originalMouseY - rect.top;
+    
 
     window.onmousemove = matchPosition;
 
@@ -39,16 +43,15 @@ function noteClicked(clickEvent) {
     }
 
     function matchPosition(e) {
-        let amountMouseMovedX = e.clientX - originalMouseX
-        let amountMouseMovedY = e.clientY - originalMouseY
-        const rect = sticky.getBoundingClientRect()
-        var updatedPositionX  = rect.left + amountMouseMovedX;
-        var updatedPositionY = rect.top + amountMouseMovedY;
+        updatedPositionX = e.clientX - offsetX;
+        updatedPositionY = e.clientY + window.scrollY - offsetY;
         
         sticky.style.left = (updatedPositionX) + "px";
         sticky.style.top = (updatedPositionY) + "px";
-        originalMouseX = e.clientX
-        originalMouseY = e.clientY
+        
+        console.log("Rect coords: ", rect.left, rect.top);
+        console.log("CSS coords: ", sticky.style.left,sticky.style.top);
+        
         getAllNotesOnPageAndPassToExtension()
     }
 }
