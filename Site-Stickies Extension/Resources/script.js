@@ -16,7 +16,8 @@ function printToConsole(event) {
 
 function createNewNote(event) {
     if (event.name == "toolbarItemClicked") {
-        newNote();
+        sticky = newNote();
+        //sticky.style.background = "rgb(174, 198, 207)";
     }
 }
 
@@ -85,8 +86,6 @@ function createNotesFromProperties(noteProperties) {
         
         sticky.innerHTML = noteProperties[`${index}`][0];
         sticky.style.left = noteProperties[`${index}`][1] + "px";
-        console.log("noteproperties numkeys: noteProperties[`${index}`][0]");
-        console.log("wdfkdslf");
         sticky.style.top = noteProperties[`${index}`][2] + "px";
         index = index + 1;
     }
