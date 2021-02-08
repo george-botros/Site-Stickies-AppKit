@@ -10,8 +10,8 @@ import SafariServices
 let defaults = UserDefaults.init(suiteName: "shockerella.Site-Stickies")
 
 struct StickyNote: Codable {
-    var top: Int?
     var left: Int?
+    var top: Int?
     var content: String?
 }
 
@@ -34,7 +34,6 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 }
                 page.dispatchMessageToScript(withName: "printToConsole", userInfo: messageToReturn)
                 page.dispatchMessageToScript(withName: "notesFromStorage", userInfo: messageToReturn)
-                // George, I finally got data storage and retireval working. For you to do: implement a function in script.js that will respond to the message "notesFromStorage" and use its userInfo (messageToReturn) to create notes in the HTML page in the correct positions and with the correct content.
             }
 
             // whenever the script notices a change to the notes (position), it will send the message 'noteUpdate' alerting the extension of the script. The userInfo of this message will be the position & content of every note. The following function's purpose is to write these updated values to memory (UserDefaults).
@@ -42,7 +41,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
                 var notesOnPage = [StickyNote]()
                 let info = userInfo as! [String : [Any]]
                 for (noteNumber, properties) in info {
-                    let note = StickyNote(top: properties[1] as? Int, left: properties[2] as? Int, content: properties[0] as? String)
+                    let note = StickyNote(left: properties[1] as? Int, top: properties[2] as? Int, content: properties[0] as? String)
                     notesOnPage.append(note)
                 }
                 let encoder = JSONEncoder()
