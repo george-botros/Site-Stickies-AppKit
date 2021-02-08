@@ -43,7 +43,7 @@ function noteClicked(clickEvent) {
     }
 
     function matchPosition(e) {
-        updatedPositionX = e.clientX - offsetX;
+        updatedPositionX = e.clientX + window.scrollX - offsetX;
         updatedPositionY = e.clientY + window.scrollY - offsetY;
         
         sticky.style.left = (updatedPositionX) + "px";
@@ -60,7 +60,7 @@ function getAllNotesOnPageAndPassToExtension() {
     let notes = document.querySelectorAll('.sticky-shockerella')
     let listOfNotes = {}
     notes.forEach((note, index) => {
-        listOfNotes[index.toString()] = [note.innerHTML, Math.floor(note.getBoundingClientRect().left), Math.floor(note.getBoundingClientRect().top)]
+        listOfNotes[index.toString()] = [note.innerHTML, Math.floor(note.getBoundingClientRect().left + window.scrollX), Math.floor(note.getBoundingClientRect().top + window.scrollY)]
     })
     console.log(listOfNotes)
     safari.extension.dispatchMessage("noteUpdate", listOfNotes)
