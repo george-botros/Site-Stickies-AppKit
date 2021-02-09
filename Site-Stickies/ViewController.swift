@@ -15,7 +15,7 @@ let extensionBundleIdentifier = "shockerella.Site-Stickies.Extension"
 class ViewController: NSViewController {
 
     @IBOutlet var appNameLabel: NSTextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appNameLabel.stringValue = appName
@@ -26,7 +26,7 @@ class ViewController: NSViewController {
             }
 
             DispatchQueue.main.async {
-                if (state.isEnabled) {
+                if state.isEnabled {
                     self.appNameLabel.stringValue = "\(appName)'s extension is currently on."
                 } else {
                     self.appNameLabel.stringValue = "\(appName)'s extension is currently off. You can turn it on in Safari Extensions preferences."
@@ -34,7 +34,7 @@ class ViewController: NSViewController {
             }
         }
     }
-    
+
     @IBAction func openSafariExtensionPreferences(_ sender: AnyObject?) {
         SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
             guard error == nil else {
