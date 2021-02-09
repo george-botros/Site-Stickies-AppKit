@@ -158,7 +158,7 @@
 				6ED9BAE725CD09060097EF0D /* Frameworks */,
 				6ED9BAE825CD09060097EF0D /* Resources */,
 				6ED9BB1725CD09070097EF0D /* Embed App Extensions */,
-				CB95DBEA25D262B300105BAF /* ShellScript */,
+				CB95DBEA25D262B300105BAF /* Swift Lint */,
 			);
 			buildRules = (
 			);
@@ -247,7 +247,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CB95DBEA25D262B300105BAF /* ShellScript */ = {
+		CB95DBEA25D262B300105BAF /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,6 +256,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Swift Lint";
 			outputFileListPaths = (
 			);
 			outputPaths = (
