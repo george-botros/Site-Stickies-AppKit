@@ -33,7 +33,11 @@ function newNote() {
     sticky.setAttribute("placeh","New note 📝");
     stickyContainer.appendChild(sticky);
     sticky.onkeyup = getAllNotesOnPageAndPassToExtension;
-    sticky.onmousedown = noteClicked;
+    sticky.addEventListener("onmousedown", function(event) {
+        event.stopPropagation();
+        noteClicked;
+    })
+
     
     var closeButton = document.createElement("div");
     stickyContainer.appendChild(closeButton);
