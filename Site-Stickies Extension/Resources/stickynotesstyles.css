@@ -1,22 +1,60 @@
-
-.sticky-shockerella {
-    
-    
+.sticky-container{
     position: absolute;
     top: 100px;
     right: 100px;
     overflow-y: scroll;
     
-    padding: 10px 10px 20px 10px;
-        
     width: 200px;
     height: 200px;
+    
+    padding: 20px 20px 0px 20px;
     background: rgb(253, 253, 150);
     color: black;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+}
+
+
+.sticky-shockerella {
+    
+    
+    width: 100%;
+    height: 100%;
+    
+    
+    /*closebutton {
+        display: none;
+        width: 20px;
+        height: 20px;
+        left: -12px;
+        top: -12px;
+        font-size: 30px;
+        line-height: 10px;
+        background-color: black;
+        position: absolute;
+        color: white;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 7px;
+        text-align: center;
+        cursor: pointer;
+        box-sizing: content-box;
+        border-width: 2px;
+        border-style: solid;
+        border-color: white;
+        border-image: initial;
+        border-radius: 20px;
+    }*/
+
     
 }
 
 .sticky-shockerella:empty:not(:focus):before{
     content:attr(placeh)
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 2px 5px;
+    background: red;
+    z-index:9999999999999;
 }

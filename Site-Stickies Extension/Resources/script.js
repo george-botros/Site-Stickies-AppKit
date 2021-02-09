@@ -16,19 +16,32 @@ function printToConsole(event) {
 
 function createNewNote(event) {
     if (event.name == "toolbarItemClicked") {
-        sticky = newNote();
+        newNote();
         //sticky.style.background = "rgb(174, 198, 207)";
     }
 }
 
 function newNote() {
+    var stickyContainer = document.createElement("div");
+    document.body.appendChild(stickyContainer);
+    stickyContainer.setAttribute("class", "sticky-container");
+    stickyContainer.onmousedown = noteClicked;
+    
     var sticky = document.createElement("div");
     sticky.setAttribute("class", "sticky-shockerella");
     sticky.setAttribute("contenteditable", "true");
     sticky.setAttribute("placeh","New note 📝");
-    document.body.appendChild(sticky);
-    sticky.onmousedown = noteClicked;
+    stickyContainer.appendChild(sticky);
     sticky.onkeyup = getAllNotesOnPageAndPassToExtension;
+    sticky.onmousedown = noteClicked;
+    
+    var closeButton = document.createElement("div");
+    stickyContainer.appendChild(closeButton);
+    closeButton.innerHTML = "❌";
+    closeButton.setAttribute("class", "closeButton")
+    closeButton.onmousedown = function() {
+        stickyContainer.remove();
+    }
     
     return sticky;
 }
