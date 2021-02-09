@@ -41,7 +41,7 @@ function newNote() {
     
     var closeButton = document.createElement("div");
     stickyContainer.appendChild(closeButton);
-    closeButton.innerHTML = "❌";
+    closeButton.innerHTML = "⨯";
     closeButton.setAttribute("class", "closeButton")
     closeButton.onmousedown = function() {
         stickyContainer.remove();

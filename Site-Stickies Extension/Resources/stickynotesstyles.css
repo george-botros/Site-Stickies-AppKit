@@ -4,13 +4,14 @@
     right: 100px;
     overflow-y: scroll;
     
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     
-    padding: 40px 20px 0px 20px;
+    padding: 20px 20px 20px 20px;
     background: rgb(253, 253, 150);
     color: black;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+    z-index: 9999999999999999999;
 }
 
 
@@ -55,10 +56,25 @@
 }
 
 .closeButton {
+    display: block;
     position: absolute;
-    top: 0px;
-    right: 0px;
-    padding: 2px 5px;
-    z-index: 9999999999999999999;
+    width: 15px;
+    height: 15px;
+    right: 3px;
+    top: 3px;
+    font-size: 22.5px;
+    line-height: 7.5px;
+    background-color: black;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 7px;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: content-box;
+    border-width: 1.5px;
+    border-style: solid;
+    border-color: white;
+    border-image: initial;
+    border-radius: 15px;
+    
     contenteditable: false;
 }
