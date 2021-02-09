@@ -29,7 +29,7 @@ function newNote() {
     
     var sticky = document.createElement("div");
     sticky.setAttribute("class", "sticky-shockerella");
-    sticky.setAttribute("contenteditable", "true");
+    sticky.setAttribute("contenteditable", "plaintext-only");
     sticky.setAttribute("placeh","New note 📝");
     stickyContainer.appendChild(sticky);
     sticky.onkeyup = getAllNotesOnPageAndPassToExtension;
@@ -41,6 +41,7 @@ function newNote() {
     closeButton.setAttribute("class", "closeButton")
     closeButton.onmousedown = function() {
         stickyContainer.remove();
+        getAllNotesOnPageAndPassToExtension();
     }
     
     return stickyContainer;
@@ -95,11 +96,11 @@ function createNotesFromProperties(noteProperties) {
     //  #    content     left(x) top(y)
     var index = 0;
     for (note in noteProperties) {
-        sticky = newNote();
+        stickyContainer = newNote();
         
-        sticky.innerHTML = noteProperties[`${index}`][0];
-        sticky.style.left = noteProperties[`${index}`][1] + "px";
-        sticky.style.top = noteProperties[`${index}`][2] + "px";
+        stickyContainer.firstChild.innerHTML = noteProperties[`${index}`][0];
+        stickyContainer.style.left = noteProperties[`${index}`][1] + "px";
+        stickyContainer.style.top = noteProperties[`${index}`][2] + "px";
         index = index + 1;
     }
         
