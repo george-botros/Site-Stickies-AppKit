@@ -25,6 +25,7 @@ function newNote() {
     var stickyContainer = document.createElement("div");
     document.body.appendChild(stickyContainer);
     stickyContainer.setAttribute("class", "sticky-container");
+    stickyContainer.style.top = 100 + window.scrollY + "px";
     stickyContainer.onmousedown = noteClicked;
     
     var sticky = document.createElement("div");
@@ -110,3 +111,6 @@ function createNotesFromProperties(noteProperties) {
         
 }
 
+/*
+ Test on https://www.harvardmocktrial.org/results
+ */
