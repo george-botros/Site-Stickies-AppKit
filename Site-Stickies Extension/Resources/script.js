@@ -43,7 +43,7 @@ function newNote() {
         stickyContainer.remove();
     }
     
-    return sticky;
+    return stickyContainer;
 }
 
 function noteClicked(clickEvent) {
@@ -73,7 +73,7 @@ function noteClicked(clickEvent) {
 }
 
 function getAllNotesOnPageAndPassToExtension() {
-    let notes = document.querySelectorAll('.sticky-shockerella')
+    let notes = document.querySelectorAll('.sticky-container')
     let listOfNotes = {}
     notes.forEach((note, index) => {
         listOfNotes[index.toString()] = [note.innerHTML, Math.floor(note.getBoundingClientRect().left + window.scrollX), Math.floor(note.getBoundingClientRect().top + window.scrollY)]

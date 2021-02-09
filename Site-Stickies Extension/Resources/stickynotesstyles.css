@@ -21,6 +21,7 @@
     height: 100%;
     
     
+    
     /*closebutton {
         display: none;
         width: 20px;
@@ -46,6 +47,10 @@
     
 }
 
+.sticky-shockerella:focus{
+    outline: 0px solid transparent;
+}
+
 .sticky-shockerella:empty:not(:focus):before{
     content:attr(placeh)
 }
@@ -55,6 +60,6 @@
     top: 10px;
     right: 10px;
     padding: 2px 5px;
-    background: red;
-    z-index:9999999999999;
+    z-index: 9999999999999999999;
+    contenteditable: false;
 }
