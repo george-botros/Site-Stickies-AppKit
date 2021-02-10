@@ -86,6 +86,7 @@ function getAllNotesOnPageAndPassToExtension() {
     })
     safari.extension.dispatchMessage("noteUpdate", listOfNotes)
 }
+//weird stuff happens when respawning + cmd+a
 
 function notesFromStorageReceiver(event) { //assign properties received from "notesFromStorage" to a variable, noteProperties which will be passed to a function that will recreate the former notes.
     if (event.name == "notesFromStorage"){

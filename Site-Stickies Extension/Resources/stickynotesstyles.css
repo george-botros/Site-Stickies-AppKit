@@ -19,7 +19,7 @@
     
     
     width: 100%;
-    
+
     
     
     /*closebutton {
@@ -66,7 +66,7 @@
     line-height: 7.5px;
     background-color: black;
     color: white;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 7px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 7px;*/
     text-align: center;
     cursor: pointer;
     box-sizing: content-box;
